@@ -1,0 +1,192 @@
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+		<title>Modelling mtDNA copy number</title>
+		<meta charset="utf-8" />
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+		<link rel="icon" href="favicon.ico" type="image/x-icon">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<script type="text/javascript" async
+		src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML">
+		</script>
+		<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+			});
+		</script>
+		<script type="text/javascript" async src="path-to-mathjax/MathJax.js?config=TeX-AMS_CHTML"></script>
+	</head>
+	<body class="is-loading">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<a href="index.html" class="logo">Home</a>
+					</header>
+
+				<!-- Nav -->
+				<nav id="nav">
+					<ul class="links">
+						<li><a href="index.html">Introduction</a></li>
+						<li><a href="scrna.html">Single-cell RNA-seq data</a></li>
+						<li class="active"><a href="modelling.html">Modelling copy number</a></li>
+						<li><a href="summary.html">Summary</a></li>
+						<li><a href="references.html">References</a></li>
+						<li><a href="acknowledgements.html">Glossary</a></li>
+					</ul>
+				</nav>
+
+				<!-- Main -->
+					<div id="main" class="alt">
+
+						<!-- Post -->
+							<section class="post">
+								<div class="inner">
+									<header class="major">
+										<h1>Modelling mtDNA copy number</h1></header>
+										<h2>Background</h2>
+									<p>Knowledge of the mechanisms that determine cellular levels of mtDNA is important for understanding and treating mitochondrial disease, however it is difficult to measure these mechanisms experimentally without damaging the cells <a href=references.html>(Chinnery & Samuels, 1999)</a>. Mathematical approaches can be powerful alternative routes for investigating the longitudinal changes occurring in mtDNA heteroplasmy over time <a href=references.html>(Chinnery & Samuels, 1999; Johnston & Jones, 2016)</a>.</p>
+									<p>Comparing the trajectories predicted by different mathematical models is valuable if the trajectories are sufficiently different. Empirical data can be compared with model predictions and the model underlying the system from which the data has been obtained can be identified. By doing this, insights can be gained into the dynamics of the system and the mechanisms driving changes in mtDNA copy number. By understanding the model underlying a healthy system, it is possible that perturbations, for example caused by cancerous tumours, can be identified. </p>
+									<p>Two models of mtDNA replication and degradation, the <a href=acknowledgements.html>linear feedback control</a> (LFC) model <a href=references.html>(Hoitzing et al., 2017)</a> and the <a href=acknowledgements.html>relaxed replication</a> (RR) model <a href=references.html>(Johnston & Jones, 2016)</a>, were compared in order to identify whether the trajectories of population changes that they predict are sufficiently different to one another. The major difference between these two models is the function that they use to model replication of mtDNA. Knowledge of mtDNA replication rate would aid greatly in deducing how cells control their populations of mitochondria. Therefore, this model comparison can be used to inform about the type of data that should be collected experimentally in order to identify the mechanisms of control used by cells to regulate copy number, i.e. which model of replication rate the cells appear to follow.  </p>
+									<h2>Methods</h2>
+									<h3>The Linear Feedback Control model</h3>
+									<p>	The LFC model assumes that the mitochondrial population is under homeostatic control and that the replication rate of mtDNA changes with deviations of the effective mtDNA population size away from the desired value. The degradation rate $&mu;$ of mtDNA is constant with feedback control being achieved through the replication rate $&lambda; = &lambda;(w,m)$. The LFC model uses various parameters, a summary of which is shown in table 3. See figure 7 for a diagrammatic representation of both models. </p>
+									<h3>The Relaxed Replication model</h3>
+									<p>The RR model assumes a continuous turnover of mtDNA in post-mitotic cells <a href=references.html>(Capps, Samuels & Chinnery, 2003; Chinnery & Samuels, 1999)</a>. mtDNA degradation is modelled as a stochastic Poisson process with rate $1/&tau;$ <a href=references.html>(Johnston & Jones, 2016)</a>. The replication rate of mtDNA is also modelled as a stochastic process of rate $&lambda;(w,m)$ which is a deterministic function of $w$ and $m$. At each time step $&Delta;t$, the value of $&lambda;(w,m)$ is calculated as $&Delta;t&lambda;(w,m)$ for determining the amount of mtDNA to add to the population. The genetic properties of the mtDNA that are added to the population are stochastic but the physical properties, such as the total copy number, are deterministic. The parameters used in the RR model are described in table 3 and figure 7 shows a schematic of the model.</p>
+									<figure>
+										<center>
+										<a class="image-link" href="images/models.png" alt="<strong>Figure 7.">
+											<img src="images/models.png" style="width: 65%;"></a>
+											<figcaption class="img-comment" style="margin: auto; text-align: center;"><font size="-1"><strong>Figure 7: </strong>The linear feedback control (LFC) and relaxed replication (RR) models. See table 3 for an explanation of all parameters. Reactions [1] and [3] represent birth/replication processes for LFC and RR models, respectively. Reactions [2] and [4] represent death/degradation events for LFC and RR models, respectively. </font></figcaption>
+										</center>
+									</figure>
+									<p>
+									<figcaption class="img-comment" style="text-align: center; margin: auto;"><font size="-1">
+										<strong>Table 3. </strong>Descriptions of parameters used in both models.</font>
+									</figcaption>
+                    <table class="table table-bordered table-hover table-striped table-condensed center table-fixed" style="background-color: white; float:center;">
+							<thead><tr><th><i><u>Parameter</i></u></th><th><i><u>Function and value</i></u></th></tr></thead>
+						<tbody>
+						 <tr><td><u><i>LFC model</i></u></td></tr>
+						 <tr><td>$&mu;$</td><td>Degradation/death rate. Set to $0.2$.</td></tr>
+						 <tr><td>N<sub>SS</sub></td><td>Number of mtDNA in the steady state. Set to $1000$.</td></tr>
+						 <tr><td>$b$</td><td>Controls how tightly stochastic trajectories are constrained around the steady state. Set to $10$<sup>-4</sup></td></tr>
+						 <tr><td>$&delta;$</td><td>Strength of detecting mutants, enables differential feedback contributions of mutant or wild type species. Set to $1$ which corresponds to mutants and wild types contributing identically to the quantity (total copy number) that is fed back on for copy number control. While $0<&delta;<1$, mutants contribute less to the quantity fed back on, for example if mutants produced less energy or mRNA molecules. </td></tr>
+						 <tr><td><u><i>RR model</i></u></td></tr>
+						 <tr><td>$&mu;$</td><td>Used to obtain $&tau;$ as $&tau;=1/&mu;$. Set to $0.2$.</td></tr>
+						 <tr><td>$&tau;$</td><td>$&tau;$<sup>-1</sup> is the degradation rate. Set to $5$.</td></tr>
+						 <tr><td>$&gamma;$</td><td>Analagous to $&delta;$ in the LFC model. Set to $1$.</td></tr>
+						 <tr><td>$&alpha;$</td><td>Controls rate of replication. Set to $2$.</td></tr>
+						 <tr><td>$w$<sub>opt</sub></td><td>Target copy number of mtDNA. Set to $1000$.</td></tr>
+						</tbody>
+					</table>
+					<h3>Model simulation</h3>
+					<p>Both models were simulated using the <a href=acknowledgements.html>Gillespie Stochastic Simulation Algorithm</a> (GSSA). The GSSA is a stochastic stimulation approach in which one reaction is executed at a time <a href=references.html>(Gillespie, 1977)</a>.  The GSSA seeks to answer the two following questions in order to simulate the system: when will the next reaction occur; and what kind of reaction will it be? It aims to answer these questions by introducing the reaction probability density function $P(&tau;,&mu;)$ which is defined as: <li>$P(&tau;,&mu;)d&tau; &cong;$ the probability that given the state ($X$<sub>1</sub>,…,$X$<sub>N</sub>) at time $t$, the next reaction in $V$ will occur in the infinitesimal time interval ($t +  &tau;, t + &tau; + d&tau;$), and will be an $R$<sub>&mu;</sub> reaction <a href=references.html>(Gillespie, 1977)</a>.</li></p><p> The probability of each reaction occurring is calculated based on the reaction’s hazard, which depends on the number of reactant molecules in that specific reaction and in the system overall. In this case, the reactions were simple birth or death reactions of wild type mtDNA for both models, such as those shown in figure 7. The time interval until the next reaction is calculated as: $interval = -log(np.random.uniform())/h0$, where $h0$ is the sum of all reactions' hazards and $np.random.uniform$ is a uniform random number <a href=references.html>(Gillespie, 1977)</a>. This process of stochastically selecting the next reaction and the time interval is repeated until the maximum time ($TMAX$) has elapsed.</p>
+					<p>Both models were simulated in this way for $100$ iterations with the initial conditions of $20$ copies of wild type mtDNA and $0$ copies of mutant mtDNA. At $t=100$ ($t1$) the algorithm returned the wild type mtDNA copy number, as well at either $t=100.25$, $t=102$ or $t=110$ ($t2$). The copy numbers from both of these time points are essentially paired data points, enabling the values obtained at $t1$ to be plotted against those obtained at $t2$. <a href=acknowledgements.html>Kernel density estimation</a> (KDE) contour plots were generated for each model for each $t2$ value. Finally, the replication rates ($&lambda;$<sub>L</sub> and $&lambda;$<sub>R</sub>) were plotted as functions of $w$, i.e. mtDNA copy number, for values around $w$<sub>opt</sub>. These plots were generated as a means to compare the two models, the replication rates, and the copy number distributions that they predicted. <p>
+						<h2>Results</h2>
+						<p>Figure 8 presents the KDE plots for both models showing how the wild type mtDNA copy number changes between $t1$ and $t2 = 100.25$, $102$, and $110$. KDE plots are made up of concentric circles of decreasing density from the centre outwards. In this case, higher density values correspond to a higher frequency of iterations returning those copy number values at both time points. Therefore, the data points found on the innermost circle can be considered as the most common, and those found on the outermost circle can be considered as the least common.
+						<figure>
+							<center>
+							<a class="image-link" href="images/model_comparison.png" alt="<strong>Figure 7.">
+								<img src="images/model_comparison.png" style="width: 100%;"></a>
+								<figcaption class="img-comment" style="margin: auto; text-align: center;"><font size="-1"><strong>Figure 8: </strong>KDE plots (click to enlarge) obtained from the RR (<b>A</b>) and the LFC (<b>B</b>) models at time intervals of 0.25 (<b>i.</b>), 2 (<b>ii.</b>) and 10 (<b>iii.</b>). Legends for density values are found on the right of each plot.</font></figcaption>
+							</center>
+						</figure>
+						<p>
+						<p>On a first glance, it appears that the topologies of the KDE plots produced by the two models are different. Firstly, the contours obtained by the RR model are much closer together for all time points than those obtained by the LFC model. Furthermore, the overall size of the plots is much lower for the RR model than the LFC model, i.e. there is less variation in values. Copy number values range between ~950 to ~1050 for the RR model and ~900 to ~1100 for the LFC model. The density values, which are found in the figure legends, are generally higher for the RR model than the corresponding density values for the LFC model. For two out of the three time intervals ($0.25$ and $10$), there are more contours for the RR model than the LFC model. </p>
+						<p>At each time interval, the two plots produced by each model are similar in shape to each other. For example in figures 8Ai and 8Bi, both shapes are diagonal ovals with similar gradients. The KDE plots for both models have similar changes in their shapes as the time interval increases, i.e. $t2$ goes from $0.25$ to $10$. The diagonal ovals change to become more sprawling circles. As the time interval increases, the range of potential copy number values at $t2$ also increases as more reactions will have taken place in both systems. Therefore, the points cover a larger proportion of the y-axis, leading to the more circular shape. Furthermore, the maximum density for both models decreases as the time interval gets larger. This decrease is observed as the wider range of copy numbers at $t2$ means that there is a lower chance of multiple iterations predicting the same $t2$ copy number, i.e. there is less concordance on the $t2$ data points. </p>
+						<p>Figure 9 is an interactive plot showing how the replication rate changes around values of $w$<sub>opt</sub> for both models. Both $&lambda;$<sub>L</sub> and $&lambda;$<sub>R</sub> decrease as mtDNA copy number approaches $w$<sub>opt</sub>. The two lines intersect at $w$<sub>$opt$</sub> itself (1000) with both $&lambda;$ values being 0.2 at this point. This shows that the values of the parameters used in the different models were equivalent to each other. After this point, $&lambda;$ decreases for both models but at a higher rate for $&lambda;$<sub>R</sub> than $&lambda;$<sub>L</sub>.</p>
+
+								</header>
+								<center>
+									<div id="scatter" >
+										<script>
+										var trace1 =
+											{
+												y: [0.24444444444444444, 0.2439511653718091, 0.2434589800443459, 0.24296788482834994, 0.2424778761061947, 0.2419889502762431, 0.24150110375275938, 0.2410143329658214, 0.24052863436123348, 0.24004400440044005, 0.23956043956043957, 0.23907793633369923, 0.23859649122807017, 0.23811610076670317, 0.23763676148796498, 0.2371584699453552, 0.2366812227074236, 0.23620501635768812, 0.2357298474945534, 0.2352557127312296, 0.23478260869565218, 0.23431053203040172, 0.23383947939262473, 0.2333694474539545, 0.2329004329004329, 0.23243243243243245, 0.23196544276457884, 0.23149946062567422, 0.23103448275862068, 0.23057050592034445, 0.23010752688172043, 0.22964554242749732, 0.22918454935622318, 0.2287245444801715, 0.22826552462526767, 0.22780748663101605, 0.22735042735042735, 0.22689434364994665, 0.22643923240938166, 0.22598509052183174, 0.225531914893617, 0.2250797024442083, 0.22462845010615712, 0.2241781548250265, 0.22372881355932203, 0.22328042328042327, 0.22283298097251586, 0.22238648363252375, 0.2219409282700422, 0.22149631190727082, 0.22105263157894736, 0.22060988433228182, 0.22016806722689075, 0.21972717733473243, 0.21928721174004193, 0.218848167539267, 0.21841004184100418, 0.2179728317659352, 0.2175365344467641, 0.21710114702815433, 0.21666666666666667, 0.2162330905306972, 0.2158004158004158, 0.2153686396677051, 0.2149377593360996, 0.21450777202072538, 0.21407867494824018, 0.21365046535677354, 0.21322314049586777, 0.21279669762641898, 0.21237113402061855, 0.21194644696189496, 0.21152263374485597, 0.21109969167523124, 0.2106776180698152, 0.21025641025641026, 0.2098360655737705, 0.20941658137154553, 0.20899795501022495, 0.20858018386108274, 0.20816326530612245, 0.20774719673802242, 0.20733197556008146, 0.2069175991861648, 0.20650406504065041, 0.20609137055837565, 0.2056795131845842, 0.20526849037487335, 0.2048582995951417, 0.2044489383215369, 0.20404040404040405, 0.2036326942482341, 0.2032258064516129, 0.2028197381671702, 0.20241448692152916, 0.2020100502512563, 0.20160642570281123, 0.2012036108324975, 0.20080160320641283, 0.2004004004004004, 0.2, 0.1996003996003996, 0.19920159680638722, 0.1988035892323031, 0.19840637450199203, 0.19800995024875623, 0.19761431411530814, 0.19721946375372393, 0.19682539682539682, 0.1964321110009911, 0.19603960396039605, 0.19564787339268053, 0.19525691699604744, 0.19486673247778874, 0.19447731755424064, 0.19408866995073892, 0.19370078740157481, 0.19331366764995084, 0.19292730844793712, 0.19254170755642788, 0.19215686274509805, 0.19177277179236044, 0.1913894324853229, 0.19100684261974585, 0.190625, 0.1902439024390244, 0.1898635477582846, 0.18948393378773126, 0.18910505836575875, 0.18872691933916425, 0.1883495145631068, 0.18797284190106692, 0.1875968992248062, 0.1872216844143272, 0.18684719535783365, 0.18647342995169083, 0.1861003861003861, 0.18572806171648987, 0.18535645472061657, 0.18498556304138594, 0.18461538461538463, 0.18424591738712776, 0.18387715930902113, 0.1835091083413231, 0.18314176245210728, 0.18277511961722487, 0.1824091778202677, 0.18204393505253105, 0.18167938931297709, 0.1813155386081983, 0.18095238095238095, 0.18058991436726926, 0.18022813688212927, 0.1798670465337132, 0.1795066413662239, 0.1791469194312796, 0.1787878787878788, 0.1784295175023652, 0.17807183364839319, 0.1777148253068933, 0.17735849056603772, 0.1770028275212064, 0.17664783427495293, 0.17629350893697085, 0.17593984962406015, 0.1755868544600939, 0.175234521575985, 0.17488284910965324, 0.1745318352059925, 0.17418147801683817, 0.17383177570093458, 0.1734827264239029, 0.17313432835820897, 0.1727865796831314, 0.17243947858473, 0.17209302325581396, 0.17174721189591077, 0.1714020427112349, 0.17105751391465676, 0.17071362372567192, 0.17037037037037037, 0.1700277520814061, 0.16968576709796673, 0.1693444136657433, 0.16900369003690036, 0.16866359447004609, 0.16832412523020257, 0.16798528058877646, 0.1676470588235294, 0.16730945821854912, 0.1669724770642202, 0.16663611365719525, 0.1663003663003663, 0.16596523330283622, 0.16563071297989032, 0.16529680365296803, 0.16496350364963502, 0.16463081130355514, 0.16429872495446265, 0.16396724294813467],
+												x: [900,  901,  902,  903,  904,  905,  906,  907,  908,  909,  910,911,  912,  913,  914,  915,  916,  917,  918,  919,  920,  921,922,  923,  924,  925,  926,  927,  928,  929,  930,  931,  932,933,  934,  935,  936,  937,  938,  939,  940,  941,  942,  943,944,  945,  946,  947,  948,  949,  950,  951,  952,  953,  954,955,  956,  957,  958,  959,  960,  961,  962,  963,  964,  965,966,  967,  968,  969,  970,  971,  972,  973,  974,  975,  976,977,  978,  979,  980,981,  982,  983,  984,  985,  986,  987,988,  989,  990,  991,  992,  993,  994,  995,  996,  997,  998,999, 1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009,1010, 1011, 1012, 1013, 1014, 1015, 1016, 1017, 1018, 1019, 1020,1021, 1022, 1023, 1024, 1025, 1026, 1027, 1028, 1029, 1030, 1031,1032, 1033, 1034, 1035, 1036, 1037, 1038, 1039, 1040, 1041, 1042,1043, 1044, 1045, 1046, 1047, 1048, 1049, 1050, 1051, 1052, 1053,1054, 1055, 1056, 1057, 1058, 1059, 1060, 1061, 1062, 1063, 1064,1065, 1066, 1067, 1068, 1069, 1070, 1071, 1072, 1073, 1074, 1075,1076, 1077, 1078, 1079, 1080, 1081, 1082, 1083, 1084, 1085, 1086,1087, 1088, 1089, 1090, 1091, 1092, 1093, 1094, 1095, 1096, 1097,1098, 1099],
+												type:'scatter',
+												name: '\u03BB<sub>R</sub>',
+												line:{
+													color: 'rgb(234, 153, 153)'
+												}
+											};
+										var trace2 =
+											{
+												y: [0.21000000000000002, 0.2099, 0.20980000000000001, 0.2097, 0.2096, 0.20950000000000002, 0.2094, 0.2093, 0.2092, 0.2091, 0.20900000000000002, 0.2089, 0.2088, 0.20870000000000002, 0.2086, 0.20850000000000002, 0.2084, 0.2083, 0.20820000000000002, 0.2081, 0.20800000000000002, 0.2079, 0.2078, 0.20770000000000002, 0.2076, 0.20750000000000002, 0.2074, 0.2073, 0.20720000000000002, 0.2071, 0.20700000000000002, 0.2069, 0.2068, 0.20670000000000002, 0.2066, 0.20650000000000002, 0.2064, 0.2063, 0.20620000000000002, 0.2061, 0.20600000000000002, 0.2059, 0.2058, 0.20570000000000002, 0.2056, 0.20550000000000002, 0.2054, 0.2053, 0.20520000000000002, 0.2051, 0.20500000000000002, 0.2049, 0.2048, 0.20470000000000002, 0.2046, 0.20450000000000002, 0.2044, 0.2043, 0.20420000000000002, 0.2041, 0.20400000000000001, 0.2039, 0.2038, 0.20370000000000002, 0.2036, 0.20350000000000001, 0.20340000000000003, 0.2033, 0.20320000000000002, 0.2031, 0.203, 0.20290000000000002, 0.2028, 0.20270000000000002, 0.2026, 0.2025, 0.20240000000000002, 0.2023, 0.20220000000000002, 0.2021, 0.202, 0.20190000000000002, 0.2018, 0.20170000000000002, 0.2016, 0.2015, 0.20140000000000002, 0.2013, 0.20120000000000002, 0.2011, 0.201, 0.20090000000000002, 0.2008, 0.20070000000000002, 0.2006, 0.2005, 0.20040000000000002, 0.2003, 0.20020000000000002, 0.2001, 0.2, 0.19990000000000002, 0.1998, 0.19970000000000002, 0.1996, 0.1995, 0.19940000000000002, 0.1993, 0.19920000000000002, 0.1991, 0.199, 0.19890000000000002, 0.1988, 0.19870000000000002, 0.1986, 0.1985, 0.19840000000000002, 0.1983, 0.19820000000000002, 0.1981, 0.198, 0.19790000000000002, 0.1978, 0.19770000000000001, 0.1976, 0.1975, 0.19740000000000002, 0.1973, 0.19720000000000001, 0.1971, 0.197, 0.19690000000000002, 0.1968, 0.1967, 0.1966, 0.1965, 0.19640000000000002, 0.1963, 0.1962, 0.19610000000000002, 0.196, 0.19590000000000002, 0.1958, 0.1957, 0.19560000000000002, 0.1955, 0.19540000000000002, 0.1953, 0.1952, 0.19510000000000002, 0.195, 0.19490000000000002, 0.1948, 0.1947, 0.19460000000000002, 0.1945, 0.19440000000000002, 0.1943, 0.1942, 0.19410000000000002, 0.194, 0.19390000000000002, 0.1938, 0.1937, 0.19360000000000002, 0.1935, 0.19340000000000002, 0.1933, 0.1932, 0.19310000000000002, 0.193, 0.19290000000000002, 0.1928, 0.1927, 0.19260000000000002, 0.1925, 0.19240000000000002, 0.1923, 0.1922, 0.19210000000000002, 0.192, 0.19190000000000002, 0.1918, 0.1917, 0.19160000000000002, 0.1915, 0.19140000000000001, 0.1913, 0.1912, 0.19110000000000002, 0.191, 0.19090000000000001, 0.19080000000000003, 0.1907, 0.19060000000000002, 0.1905, 0.1904, 0.19030000000000002, 0.1902, 0.19010000000000002],
+												x: [900,  901,  902,  903,  904,  905,  906,  907,  908,  909,  910,911,  912,  913,  914,  915,  916,  917,  918,  919,  920,  921,922,  923,  924,  925,  926,  927,  928,  929,  930,  931,  932,933,  934,  935,  936,  937,  938,  939,  940,  941,  942,  943,944,  945,  946,  947,  948,  949,  950,  951,  952,  953,  954,955,  956,  957,  958,  959,  960,  961,  962,  963,  964,  965,966,  967,  968,  969,  970,  971,  972,  973,  974,  975,  976,977,  978,  979,  980,981,  982,  983,  984,  985,  986,  987,988,  989,  990,  991,  992,  993,  994,  995,  996,  997,  998,999, 1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009,1010, 1011, 1012, 1013, 1014, 1015, 1016, 1017, 1018, 1019, 1020,1021, 1022, 1023, 1024, 1025, 1026, 1027, 1028, 1029, 1030, 1031,1032, 1033, 1034, 1035, 1036, 1037, 1038, 1039, 1040, 1041, 1042,1043, 1044, 1045, 1046, 1047, 1048, 1049, 1050, 1051, 1052, 1053,1054, 1055, 1056, 1057, 1058, 1059, 1060, 1061, 1062, 1063, 1064,1065, 1066, 1067, 1068, 1069, 1070, 1071, 1072, 1073, 1074, 1075,1076, 1077, 1078, 1079, 1080, 1081, 1082, 1083, 1084, 1085, 1086,1087, 1088, 1089, 1090, 1091, 1092, 1093, 1094, 1095, 1096, 1097,1098, 1099],
+												type:'scatter',
+												name:'\u03BB<sub>L</sub>',
+												line:{
+													color: 'rgb(255, 217, 102)'
+												}
+											};
+
+										var data = [trace1, trace2];
+										var layout = {
+											title: 'Changes in replication rates around w<sub>opt</sub> for both models.',
+											font: {
+												family: 'Merriweather',
+											},
+											xaxis: {
+												title: 'Wild type mtDNA copy number'
+											},
+											yaxis: {
+												title: 'Replication rate \u03BB'
+											}
+
+										};
+										Plotly.plot('scatter',data,layout);
+										</script>
+										<figcaption class="img-comment" style="margin: auto; text-align: center;"><font size="-1"><strong>Figure 9: </strong>An interactive plot showing how increasing mtDNA copy number affects replication rate ($&lambda;$) for the two models. $&lambda;$<sub>L</sub> is replication rate for the LFC model and $&lambda;$<sub>R</sub> is replication rate for the RR model. $w$<sub>opt</sub> is 1000.</font></figcaption>
+									</div>
+								</center><p>
+								<h2>Discussion</h2>
+								Initially, the two models appear to result in slightly different mtDNA population trajectories (fig. 8). For each time interval, the RR model shows less variation in mtDNA copy number at both $t1$ and $t2$ in comparison to the LFC model. This difference in variation of copy numbers, however, may be inadequate for distinguishing between the two models given a dataset of mtDNA copy numbers obtained at two closely-spaced time intervals. Furthermore, the difference in variation could result from parameters used in either model. The $b$ parameter from the LFC model is set to $10$<sup>-4</sup>. Given that this parameter (see table 3) controls how tightly stochastic trajectories are controlled around the steady state, by increasing $b$ the variation observed in copy numbers in the LFC model may decrease, resulting in a plot that more closely resembles that of the RR model.<p>
+								</p>Figure 9 shows that the replication rate varies between the two models around values of $w$<sub>opt</sub>. Specifically, it shows that the RR model experiences a more rapid reduction in replication rate in comparison to the LFC model. By focusing on just one parameter, it is evident that the two models would cause different trajectories of mtDNA populations, suggesting that further analyses should be performed to identify how the models differ and the type of data that should be collected to enable the models to be distinguished from each other. <p>
+								</p>Other approaches could be used to attempt to distinguish between the models. Firstly, the smallest time interval investigated here was 0.25 which corresponds to a quarter of a day or 6 hours. By further reducing this time interval to one that is small enough to only allow for a couple of reactions to take place, it is possible that more remarkable differences between the two models may be observable which will facilitate model identification. Secondly, in this study the mtDNA copy number has essentially been tracked at the single-cell level and the values corresponding to multiple cells have been reported. An alternative approach would be to track single organelles to see how frequently the organelles duplicate or degrade. This would be a more precise representation than studying at the cellular level. Finally, a system which is at the steady state of mtDNA copy number could be taken and disrupted by using mitochondrial zinc finger nucleases (mtZFNs) or mitochondrial talens (mtTALENs; <a href=references.html>Gammage, Moraes & Minczuk, 2017)</a>. Once the steady state has been knocked out, the recovery of the mtDNA population could be examined in order to independently estimate the parameters used in either model, for example $b$. These estimated parameters could then be integrated into the models and the models could be compared again in case the trajectories had changed due to the introduction of more accurate parameter values.
+								<p>
+									<ul class="actions">
+										<li><a href="#" class="button big">Back to top</a></li>
+									</ul>
+
+
+
+								</section>
+							</div>
+
+
+
+				<!-- Copyright -->
+				<div id="copyright">
+					<ul><li>Heather Jackson</li><li>CID: 01402152</li><li>Imperial College London</li>
+						<li>&copy; Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+						<ul><li>Background: <a href="https://phys.org/news/2017-06-mitochondria-blood-cell-formation.html">Northwestern University</a></li></ul>
+				</div>
+
+
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			<script src="https://code.highcharts.com/highcharts.js"></script>
+			<script src="qpcr_plot.js"></script>
+
+	</body>
+</html>
